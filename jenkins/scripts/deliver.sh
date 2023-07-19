@@ -20,7 +20,15 @@ set -x
 VERSION=`mvn help:evaluate -Dexpression=project.version | grep "^[^\[]"`
 set +x
 
-echo 'The following command runs and outputs the execution of your Java'
-echo 'application (which Jenkins built using Maven) to the Jenkins UI.'
+echo 'Starting the web server...'
 set -x
-java -jar target/${NAME}-${VERSION}.jar
+java -jar target/${NAME}-${VERSION}.jar &
+set +x
+
+echo 'Waiting for the server to start...'
+sleep 10
+
+echo 'Testing the web server...'
+set -x
+curl -X GET http://0.0.0.0:8080
+set +x

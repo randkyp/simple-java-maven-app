@@ -1,5 +1,5 @@
 node {
-    docker.image('maven:3.9.0').inside('-v /root/.m2:/root/.m2') {
+    docker.image('maven:3.9.0').inside('-v /root/.m2:/root/.m2 -p 8080:8080') {
         stage('Build') {
             sh 'mvn -B -DskipTests clean package'
         }
@@ -9,7 +9,7 @@ node {
             junit 'target/surefire-reports/*.xml'
         }
         
-        stage('Deliver') {
+        stage('Deploy') {
             sh './jenkins/scripts/deliver.sh'
         }
     }
