@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+echo '!!! TEST TEXT TO SEE IF JENKINS BUILDER CAN FETCH THIS !!!'
 echo 'The following Maven command installs your Maven-built Java application'
 echo 'into the local Maven repository, which will ultimately be stored in'
 echo 'Jenkins''s local Maven repository (and the "maven-repository" Docker data'
