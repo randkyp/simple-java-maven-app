@@ -2,7 +2,7 @@ node {
     docker.image('maven:3.9.0').inside('-p 8080:8080') {
         stage('Build') {
             // try to clean local repo before build
-            mvn dependency:purge-local-repository
+            sh 'mvn dependency:purge-local-repository'
             sh 'mvn -B -e -X -DskipTests clean package'
         }
         
