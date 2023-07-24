@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-echo '!!! TEST TEXT TO SEE IF JENKINS BUILDER CAN FETCH THIS !!!'
+# FIXME: here for debugging purposes. Delete next line when we're done
+echo '!!! Last modified: 19:30 24/07/2023 !!!'
 echo 'The following Maven command installs your Maven-built Java application'
 echo 'into the local Maven repository, which will ultimately be stored in'
 echo 'Jenkins''s local Maven repository (and the "maven-repository" Docker data'
@@ -30,6 +31,17 @@ echo 'Waiting for the server to start...'
 sleep 10
 
 echo 'Testing the web server...'
+set -e  # Exit immediately if any command returns a non-zero status
 set -x
-curl -X GET http://0.0.0.0:8080
+curl -X GET -f http://0.0.0.0:8080
+set +x
+
+echo 'Web server is up and running. Pausing for 1 minute.'
+set -x
+sleep 60
+set +x
+
+echo 'Terminating web server.'
+set -x
+pkill -f "java -jar target/${NAME}-${VERSION}.jar"
 set +x
