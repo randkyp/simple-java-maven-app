@@ -8,8 +8,7 @@ RUN mvn -B -DskipTests clean package
 # Stage 2: Deploy the resulting artifact
 FROM openjdk:11-jre-slim
 WORKDIR /deploy
-COPY --from=builder /app/project_url/target/*.jar app.jar
+COPY --from=builder /app/simple-java-maven-app/target/my-app-1.0-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
-# Set the startup command to run the .jar file
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-cp", "app.jar", "com.mycompany.app.App"]
