@@ -54,9 +54,7 @@ print_tree() {
   done
 }
 current_dir=$(pwd)
-set -x
 print_tree "$current_dir" ""
-set +x
 
 echo 'Starting the web server...'
 set -x
