@@ -20,11 +20,6 @@ set -x
 VERSION=`mvn help:evaluate -Dexpression=project.version | grep "^[^\[]"`
 set +x
 
-echo 'Copying the JAR file to the workspace directory...'
-set -x
-cp target/${NAME}-${VERSION}.jar ./app.jar
-set +x
-
 echo 'Starting the web server...'
 set -x
 java -jar target/${NAME}-${VERSION}.jar &
@@ -34,7 +29,7 @@ echo 'Waiting for the server to start...'
 sleep 10
 
 echo 'Testing the web server...'
-set -e  # Exit immediately if any command returns a non-zero status
+set -e
 set -x
 curl -X GET -f http://0.0.0.0:8080
 set +x
