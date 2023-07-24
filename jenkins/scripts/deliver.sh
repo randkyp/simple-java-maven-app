@@ -7,7 +7,13 @@ set -x
 cp target/${NAME}-${VERSION}.jar ./app.jar
 set +x
 
-echo "Delivery stage not implemented yet."
+# Install Railway CLI
+echo 'Installing Railway CLI...'
+set -x
+set -e
+bash <(curl -fsSL cli.new)
+set +x
+set +e
 
 # Wait for 1 minute on success
 set -x

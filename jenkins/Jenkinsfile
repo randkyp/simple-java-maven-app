@@ -22,7 +22,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 input message: 'Lanjutkan ke tahap Deploy?? (Klik "Proceed" untuk melanjutkan)'
-                sh './jenkins/scripts/deliver.sh'
+                sh '''
+                withCredentials([string(credentialsId: 'RAILWAY_TOKEN', variable: 'RAILWAY_TOKEN')]) {
+                    ./jenkins/scripts/deliver.sh "$RAILWAY_TOKEN"
+                }
+                '''
             }
         }
     }
