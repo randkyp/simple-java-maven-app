@@ -34,7 +34,4 @@ set -x
 curl -X GET -f http://0.0.0.0:8080
 set +x
 
-echo 'Web server is up and running. Pausing for 1 minute.'
-set -x
-sleep 60
-set +x
+echo 'Web server is up and running.'
