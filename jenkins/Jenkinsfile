@@ -8,8 +8,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // FIXME: debugging step, remove later
-                // sh 'mvn dependency:purge-local-repository'
                 sh 'mvn -B -DskipTests clean package'
             }
         }
@@ -17,6 +15,7 @@ pipeline {
             steps {
                 sh 'mvn test'
                 junit 'target/surefire-reports/*.xml'
+                sh './jenkins/scripts/test.sh'
             }
         }
         stage('Deploy') {
