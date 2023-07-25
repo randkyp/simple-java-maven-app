@@ -16,12 +16,17 @@ pipeline {
                 sh 'mvn test'
                 sh "chmod +x -R ${env.WORKSPACE}"
                 sh './jenkins/scripts/test.sh'
-                input message: 'Lanjutkan ke tahap Deploy?'
+
             }
             post {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
+            }
+        }
+        stage('Manual approval') {
+            steps {
+                input message: 'Lanjutkan ke tahap Deploy?'
             }
         }
         stage('Deploy') {
