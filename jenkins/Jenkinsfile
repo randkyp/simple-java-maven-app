@@ -16,6 +16,7 @@ pipeline {
                 sh 'mvn test'
                 sh "chmod +x -R ${env.WORKSPACE}"
                 sh './jenkins/scripts/test.sh'
+                input message: 'Lanjutkan ke tahap Deploy?'
             }
             post {
                 always {
@@ -29,7 +30,6 @@ pipeline {
                 RAILWAY_TOKEN = credentials('RAILWAYPROJECT')
             }
             steps {
-                input message: 'Lanjutkan ke tahap Deploy?'
                 sh './jenkins/scripts/deliver.sh'
             }
         }
